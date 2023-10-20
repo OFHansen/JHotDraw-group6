@@ -89,6 +89,7 @@ public class DeleteAction extends TextAction {
      * @param target The target of the action. Specify null for the currently
      * focused component.
      */
+
     protected DeleteAction(JComponent target, String id) {
         super(id);
         this.target = target;
