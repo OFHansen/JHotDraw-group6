@@ -7,6 +7,7 @@
  */
 package org.jhotdraw.draw.action;
 
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.draw.figure.Figure;
 import org.jhotdraw.draw.figure.CompositeFigure;
 import org.jhotdraw.draw.figure.GroupFigure;
@@ -144,6 +145,7 @@ public class GroupAction extends AbstractSelectedAction {
         }
     }
 
+    @FeatureEntryPoint("Ungrouping")
     public Collection<Figure> ungroupFigures(DrawingView view, CompositeFigure group) {
 // XXX - This code is redundant with UngroupAction
         LinkedList<Figure> figures = new LinkedList<>(group.getChildren());
@@ -155,6 +157,7 @@ public class GroupAction extends AbstractSelectedAction {
         return figures;
     }
 
+    @FeatureEntryPoint("Grouping")
     public void groupFigures(DrawingView view, CompositeFigure group, Collection<Figure> figures) {
         Collection<Figure> sorted = view.getDrawing().sort(figures);
         int index = view.getDrawing().indexOf(sorted.iterator().next());
