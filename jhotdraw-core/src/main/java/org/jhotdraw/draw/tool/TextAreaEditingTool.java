@@ -7,6 +7,7 @@
  */
 package org.jhotdraw.draw.tool;
 
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.draw.figure.TextHolderFigure;
 import java.awt.*;
 import java.awt.event.*;
@@ -77,6 +78,7 @@ public class TextAreaEditingTool extends AbstractTool implements ActionListener 
      * If editing is in progress, this finishes editing.
      */
     @Override
+    @FeatureEntryPoint("Text Editing Mouse Pressed")
     public void mousePressed(MouseEvent e) {
         if (typingTarget != null) {
             beginEdit(typingTarget);
