@@ -19,6 +19,8 @@ import java.util.Set;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.UndoableEdit;
+
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.api.app.Disposable;
 import org.jhotdraw.api.gui.AttributeEditor;
 import org.jhotdraw.beans.WeakPropertyChangeListener;

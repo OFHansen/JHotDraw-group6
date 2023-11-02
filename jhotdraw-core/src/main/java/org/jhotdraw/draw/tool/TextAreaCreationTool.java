@@ -7,6 +7,7 @@
  */
 package org.jhotdraw.draw.tool;
 
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.draw.figure.Figure;
 import org.jhotdraw.draw.figure.TextHolderFigure;
 import java.awt.*;
@@ -92,7 +93,6 @@ public class TextAreaCreationTool extends CreationTool implements ActionListener
     public TextAreaCreationTool(TextHolderFigure prototype) {
         super(prototype);
     }
-
     public TextAreaCreationTool(TextHolderFigure prototype, Map<AttributeKey<?>, Object> attributes) {
         super(prototype, attributes);
     }
@@ -118,6 +118,7 @@ public class TextAreaCreationTool extends CreationTool implements ActionListener
      * If editing is in progress, this finishes editing.
      */
     @Override
+    @FeatureEntryPoint("Text Creation Mouse Pressed")
     public void mousePressed(MouseEvent e) {
         // Note: The search sequence used here, must be
         // consistent with the search sequence used by the
