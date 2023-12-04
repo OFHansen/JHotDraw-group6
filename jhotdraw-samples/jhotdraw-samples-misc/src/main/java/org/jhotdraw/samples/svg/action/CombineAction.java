@@ -97,20 +97,50 @@ public class CombineAction extends AbstractSelectedAction {
         }
     }
 
+    private void fillUngroupedPaths(List<Figure> ungroupedPaths, int[] ungroupedPathsIndices, int [] ungroupedPathsChildCounts){
+
+    }
+
+    private List<Figure> gatherUngroupedParts(DrawingView view, Drawing drawing){
+        return drawing.sort(view.getSelectedFigures());
+    }
+
+    private int[] getUngroupedPathsIndices(List<Figure> ungroupedPaths,Drawing drawing){
+        int[] ungroupedPathsIndices = new int[ungroupedPaths.size()];
+
+        int i = 0;
+        for (Figure f : ungroupedPaths) {
+            ungroupedPathsIndices[i] = drawing.indexOf(f);
+            i++;
+        }
+        return ungroupedPathsIndices;
+    }
+
+    private int[] getUngroupedPathsChildCounts(List<Figure> ungroupedPaths){
+        int[] ungroupedPathsChildCounts = new int[ungroupedPaths.size()];
+
+        int i = 0;
+        for (Figure f : ungroupedPaths) {
+            ungroupedPathsChildCounts[i] = ((CompositeFigure) f).getChildCount();
+            i++;
+        }
+        return ungroupedPathsChildCounts;
+    }
+
+    private CompositeFigure createCompositeGroup(){
+        return (CompositeFigure) prototype.clone();
+    }
+
     public void combineActionPerformed(java.awt.event.ActionEvent e) {
         final DrawingView view = getView();
         Drawing drawing = view.getDrawing();
         if (canGroup()) {
-            final List<Figure> ungroupedPaths = drawing.sort(view.getSelectedFigures());
-            final int[] ungroupedPathsIndices = new int[ungroupedPaths.size()];
-            final int[] ungroupedPathsChildCounts = new int[ungroupedPaths.size()];
-            int i = 0;
-            for (Figure f : ungroupedPaths) {
-                ungroupedPathsIndices[i] = drawing.indexOf(f);
-                ungroupedPathsChildCounts[i] = ((CompositeFigure) f).getChildCount();
-                i++;
-            }
-            final CompositeFigure group = (CompositeFigure) prototype.clone();
+
+            final List<Figure> ungroupedPaths = gatherUngroupedParts(view,drawing);
+            final int[] ungroupedPathsIndices = getUngroupedPathsIndices(ungroupedPaths,drawing);
+            final int[] ungroupedPathsChildCounts = getUngroupedPathsChildCounts(ungroupedPaths);
+            final CompositeFigure group = createCompositeGroup();
+
             combinePaths(view, group, ungroupedPaths, ungroupedPathsIndices[0]);
             UndoableEdit edit = new AbstractUndoableEdit() {
                 private static final long serialVersionUID = 1L;
@@ -140,6 +170,8 @@ public class CombineAction extends AbstractSelectedAction {
             fireUndoableEditHappened(edit);
         }
     }
+
+
 
     @SuppressWarnings("unchecked")
     public void splitActionPerformed(java.awt.event.ActionEvent e) {
