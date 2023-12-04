@@ -41,7 +41,9 @@ public class BringToFrontAction extends AbstractSelectedAction {
     public void actionPerformed(java.awt.event.ActionEvent e) {
         final DrawingView view = getView();
         final LinkedList<Figure> figures = new LinkedList<>(view.getSelectedFigures());
-        bringToFront(view, figures);
+        BringToFrontCommand bringToFrontCommand = new BringToFrontCommand(view, figures);
+        SendToBackCommand sendToBackCommand = new SendToBackCommand(view, figures);
+        bringToFrontCommand.execute();
         fireUndoableEditHappened(new AbstractUndoableEdit() {
             private static final long serialVersionUID = 1L;
 
@@ -55,22 +57,24 @@ public class BringToFrontAction extends AbstractSelectedAction {
             @Override
             public void redo() throws CannotRedoException {
                 super.redo();
-                BringToFrontAction.bringToFront(view, figures);
+                bringToFrontCommand.execute();
             }
 
             @Override
             public void undo() throws CannotUndoException {
                 super.undo();
-                SendToBackAction.sendToBack(view, figures);
+                sendToBackCommand.execute();
             }
         });
     }
 
-    @FeatureEntryPoint("Bring to front")
+    /*@FeatureEntryPoint("Bring to front")
     public static void bringToFront(DrawingView view, Collection<Figure> figures) {
         Drawing drawing = view.getDrawing();
         for (Figure figure : drawing.sort(figures)) {
             drawing.bringToFront(figure);
         }
     }
+
+     */
 }

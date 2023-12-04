@@ -38,9 +38,12 @@ public class SendToBackAction extends AbstractSelectedAction {
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e) {
+        System.out.println(e.getActionCommand());
         final DrawingView view = getView();
         final LinkedList<Figure> figures = new LinkedList<>(view.getSelectedFigures());
-        sendToBack(view, figures);
+        SendToBackCommand sendToBackCommand = new SendToBackCommand(view, figures);
+        BringToFrontCommand bringToFrontCommand = new BringToFrontCommand(view, figures);
+        sendToBackCommand.execute();
         fireUndoableEditHappened(new AbstractUndoableEdit() {
             private static final long serialVersionUID = 1L;
 
@@ -54,17 +57,18 @@ public class SendToBackAction extends AbstractSelectedAction {
             @Override
             public void redo() throws CannotRedoException {
                 super.redo();
-                SendToBackAction.sendToBack(view, figures);
+                sendToBackCommand.execute();
             }
 
             @Override
             public void undo() throws CannotUndoException {
                 super.undo();
-                BringToFrontAction.bringToFront(view, figures);
+                bringToFrontCommand.execute();
             }
         });
     }
 
+    /*
     @FeatureEntryPoint("Send to Back")
     public static void sendToBack(DrawingView view, Collection<Figure> figures) {
         Drawing drawing = view.getDrawing();
@@ -72,4 +76,6 @@ public class SendToBackAction extends AbstractSelectedAction {
             drawing.sendToBack(figure);
         }
     }
+
+     */
 }
