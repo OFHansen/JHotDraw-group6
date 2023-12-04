@@ -48,10 +48,6 @@ public class CombineAction extends AbstractSelectedAction {
         this(editor, new SVGPathFigure(true), true);
     }
 
-    public CombineAction(DrawingEditor editor, SVGPathFigure prototype) {
-        this(editor, prototype, true);
-    }
-
     @FeatureEntryPoint("CombineAction")
     public CombineAction(DrawingEditor editor, SVGPathFigure prototype, boolean isGroupingAction) {
         super(editor);
@@ -112,8 +108,6 @@ public class CombineAction extends AbstractSelectedAction {
             for (Figure f : ungroupedPaths) {
                 ungroupedPathsIndices[i] = drawing.indexOf(f);
                 ungroupedPathsChildCounts[i] = ((CompositeFigure) f).getChildCount();
-                //System.out.print("CombineAction indices[" + i + "] = " + ungroupedPathsIndices[i]);
-                //System.out.println(" childCount[" + i + "] = " + ungroupedPathsChildCounts[i]);
                 i++;
             }
             final CompositeFigure group = (CompositeFigure) prototype.clone();
