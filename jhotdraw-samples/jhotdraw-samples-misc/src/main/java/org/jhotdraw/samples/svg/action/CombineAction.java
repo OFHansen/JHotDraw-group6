@@ -97,10 +97,6 @@ public class CombineAction extends AbstractSelectedAction {
         }
     }
 
-    private void fillUngroupedPaths(List<Figure> ungroupedPaths, int[] ungroupedPathsIndices, int [] ungroupedPathsChildCounts){
-
-    }
-
     private List<Figure> gatherUngroupedParts(DrawingView view, Drawing drawing){
         return drawing.sort(view.getSelectedFigures());
     }
@@ -131,42 +127,49 @@ public class CombineAction extends AbstractSelectedAction {
         return (CompositeFigure) prototype.clone();
     }
 
+    private UndoableEdit createUndoableEdit(DrawingView view, CompositeFigure group, List<Figure> ungroupedPaths,
+                                            int[] ungroupedPathsIndices, int[] ungroupedPathsChildCounts){
+        UndoableEdit undoableEdit = new AbstractUndoableEdit() {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public String getPresentationName() {
+                return labels.getTextProperty("edit.combinePaths");
+            }
+
+            @Override
+            public void redo() throws CannotRedoException {
+                super.redo();
+                combinePaths(view, group, ungroupedPaths, ungroupedPathsIndices[0]);
+            }
+
+            @Override
+            public void undo() throws CannotUndoException {
+                super.undo();
+                splitPath(view, group, ungroupedPaths, ungroupedPathsIndices, ungroupedPathsChildCounts);
+            }
+
+            @Override
+            public boolean addEdit(UndoableEdit anEdit) {
+                return super.addEdit(anEdit);
+            }
+        };
+
+        return undoableEdit;
+    }
+
     public void combineActionPerformed(java.awt.event.ActionEvent e) {
         final DrawingView view = getView();
         Drawing drawing = view.getDrawing();
         if (canGroup()) {
-
             final List<Figure> ungroupedPaths = gatherUngroupedParts(view,drawing);
             final int[] ungroupedPathsIndices = getUngroupedPathsIndices(ungroupedPaths,drawing);
             final int[] ungroupedPathsChildCounts = getUngroupedPathsChildCounts(ungroupedPaths);
             final CompositeFigure group = createCompositeGroup();
 
             combinePaths(view, group, ungroupedPaths, ungroupedPathsIndices[0]);
-            UndoableEdit edit = new AbstractUndoableEdit() {
-                private static final long serialVersionUID = 1L;
 
-                @Override
-                public String getPresentationName() {
-                    return labels.getTextProperty("edit.combinePaths");
-                }
-
-                @Override
-                public void redo() throws CannotRedoException {
-                    super.redo();
-                    combinePaths(view, group, ungroupedPaths, ungroupedPathsIndices[0]);
-                }
-
-                @Override
-                public void undo() throws CannotUndoException {
-                    super.undo();
-                    splitPath(view, group, ungroupedPaths, ungroupedPathsIndices, ungroupedPathsChildCounts);
-                }
-
-                @Override
-                public boolean addEdit(UndoableEdit anEdit) {
-                    return super.addEdit(anEdit);
-                }
-            };
+            UndoableEdit edit = createUndoableEdit(view,group,ungroupedPaths,ungroupedPathsIndices,ungroupedPathsChildCounts);
             fireUndoableEditHappened(edit);
         }
     }
