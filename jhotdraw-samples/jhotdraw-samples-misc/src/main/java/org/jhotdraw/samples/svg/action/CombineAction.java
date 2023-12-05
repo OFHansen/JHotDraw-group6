@@ -103,7 +103,6 @@ public class CombineAction extends AbstractSelectedAction {
 
     private int[] getUngroupedPathsIndices(List<Figure> ungroupedPaths,Drawing drawing){
         int[] ungroupedPathsIndices = new int[ungroupedPaths.size()];
-
         int i = 0;
         for (Figure f : ungroupedPaths) {
             ungroupedPathsIndices[i] = drawing.indexOf(f);
@@ -254,8 +253,7 @@ public class CombineAction extends AbstractSelectedAction {
         AffineTransform tx = figures.iterator().next().get(TRANSFORM);
         for (Figure f : figures) {
             AffineTransform ftx = f.get(TRANSFORM);
-            if (ftx == tx || ftx != null && tx != null && ftx.equals(tx)) {
-            } else {
+            if (!(ftx == tx || ftx != null && tx != null && ftx.equals(tx))) {
                 tx = null;
                 break;
             }
