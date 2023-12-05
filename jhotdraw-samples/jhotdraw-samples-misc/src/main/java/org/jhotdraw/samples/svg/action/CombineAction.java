@@ -16,7 +16,6 @@ import javax.swing.undo.*;
 import org.jhotdraw.draw.*;
 import static org.jhotdraw.draw.AttributeKeys.TRANSFORM;
 import org.jhotdraw.draw.action.*;
-import org.jhotdraw.samples.svg.figures.SVGBezierFigure;
 import org.jhotdraw.samples.svg.figures.SVGPathFigure;
 import org.jhotdraw.util.*;
 
@@ -38,9 +37,7 @@ public class CombineAction extends AbstractSelectedAction {
      * If this variable is false, this action ungroups figures.
      */
     private boolean isCombineAction;
-    private ResourceBundleUtil labels
-            = ResourceBundleUtil.getBundle("org.jhotdraw.samples.svg.Labels");
-
+    private ResourceBundleUtil labels;
     /**
      * Creates a new instance.
      */
@@ -128,8 +125,8 @@ public class CombineAction extends AbstractSelectedAction {
 
     private UndoableEdit createUndoableEdit(DrawingView view, CompositeFigure group, List<Figure> ungroupedPaths,
                                             int[] ungroupedPathsIndices, int[] ungroupedPathsChildCounts){
-        UndoableEdit undoableEdit = new AbstractUndoableEdit() {
-            private static final long serialVersionUID = 1L;
+
+        return new AbstractUndoableEdit() {
 
             @Override
             public String getPresentationName() {
@@ -153,8 +150,6 @@ public class CombineAction extends AbstractSelectedAction {
                 return super.addEdit(anEdit);
             }
         };
-
-        return undoableEdit;
     }
 
     public void combineActionPerformed(java.awt.event.ActionEvent e) {
@@ -181,7 +176,7 @@ public class CombineAction extends AbstractSelectedAction {
         Drawing drawing = view.getDrawing();
         if (canUngroup()) {
             final CompositeFigure group = (CompositeFigure) view.getSelectedFigures().iterator().next();
-            final LinkedList<Figure> ungroupedPaths = new LinkedList<Figure>();
+            final LinkedList<Figure> ungroupedPaths = new LinkedList<>();
             final int[] ungroupedPathsIndices = new int[group.getChildCount()];
             final int[] ungroupedPathsChildCounts = new int[group.getChildCount()];
             int i = 0;
@@ -223,7 +218,7 @@ public class CombineAction extends AbstractSelectedAction {
 
     public void splitPath(DrawingView view, CompositeFigure group, List<Figure> ungroupedPaths, int[] ungroupedPathsIndices, int[] ungroupedPathsChildCounts) {
         view.clearSelection();
-        Iterator<Figure> groupedFigures = new LinkedList<Figure>(group.getChildren()).iterator();
+        Iterator<Figure> groupedFigures = new LinkedList<>(group.getChildren()).iterator();
         group.basicRemoveAllChildren();
         view.getDrawing().remove(group);
         SVGPathFigure pathFigure = (SVGPathFigure) group;
@@ -253,7 +248,7 @@ public class CombineAction extends AbstractSelectedAction {
         AffineTransform tx = figures.iterator().next().get(TRANSFORM);
         for (Figure f : figures) {
             AffineTransform ftx = f.get(TRANSFORM);
-            if (!(ftx == tx || ftx != null && tx != null && ftx.equals(tx))) {
+            if (!(Objects.equals(ftx, tx))) {
                 tx = null;
                 break;
             }
@@ -270,10 +265,9 @@ public class CombineAction extends AbstractSelectedAction {
             if (tx == null) {
                 path.flattenTransform();
             }
-            List<Figure> children = new LinkedList<Figure>(path.getChildren());
+            List<Figure> children = new LinkedList<>(path.getChildren());
             path.basicRemoveAllChildren();
             for (Figure child : children) {
-                SVGBezierFigure bez = (SVGBezierFigure) child;
                 child.willChange();
                 group.basicAdd(child);
             }
