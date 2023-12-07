@@ -280,4 +280,11 @@ public class CombineAction extends AbstractSelectedAction {
         group.changed();
         view.addToSelection(group);
     }
+
+    public SVGPathFigure getPrototype(){
+        return (SVGPathFigure) prototype;
+    }
+    public boolean getIsCombineAction(){
+        return isCombineAction;
+    }
 }
