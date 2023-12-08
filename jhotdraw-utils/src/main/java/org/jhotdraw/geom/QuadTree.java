@@ -26,7 +26,7 @@ import java.util.Map;
  * @author Werner Randelshofer
  * @version $Id$
  */
-public class QuadTree<T> implements Serializable {
+public class  QuadTree<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private HashMap<T, Rectangle2D.Double> outside = new HashMap<>();
