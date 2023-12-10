@@ -1,0 +1,104 @@
+{
+  "className": "org.jhotdraw.draw.figure.AcceptanceTest",
+  "name": "Acceptance",
+  "scenarios": [
+    {
+      "className": "org.jhotdraw.draw.figure.AcceptanceTest",
+      "testMethodName": "acceptanceTest",
+      "description": "Acceptance test",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [
+            {
+              "name": "add figures",
+              "words": [
+                {
+                  "value": "Given",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "add figures"
+                },
+                {
+                  "value": "TextFigure@1780293706, TextFigure@1658511941",
+                  "argumentInfo": {
+                    "argumentName": "figure",
+                    "formattedValue": "TextFigure@1780293706, TextFigure@1658511941"
+                  }
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 30886100,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "bring to front",
+              "words": [
+                {
+                  "value": "When",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "bring to front"
+                },
+                {
+                  "value": "TextFigure@1780293706",
+                  "argumentInfo": {
+                    "argumentName": "figure",
+                    "formattedValue": "TextFigure@1780293706"
+                  }
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 645400,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "assert new layer",
+              "words": [
+                {
+                  "value": "Then",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "assert new layer"
+                },
+                {
+                  "value": "1",
+                  "argumentInfo": {
+                    "argumentName": "numb",
+                    "formattedValue": "1"
+                  }
+                },
+                {
+                  "value": "TextFigure@1780293706",
+                  "argumentInfo": {
+                    "argumentName": "fig",
+                    "formattedValue": "TextFigure@1780293706"
+                  }
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 460000,
+              "depth": 0,
+              "parentFailed": false
+            }
+          ],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "SUCCESS",
+          "durationInNanos": 131441900
+        }
+      ],
+      "casesAsTable": false,
+      "durationInNanos": 131441900
+    }
+  ],
+  "tagMap": {}
+}
