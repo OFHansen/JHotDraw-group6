@@ -183,7 +183,6 @@ public class TextCreationTool extends CreationTool implements ActionListener {
             typingTarget = null;
             textField.endOverlay();
         }
-        //         view().checkDamage();
     }
 
     @Override
