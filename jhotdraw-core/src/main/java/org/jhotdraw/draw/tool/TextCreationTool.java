@@ -132,8 +132,14 @@ public class TextCreationTool extends CreationTool implements ActionListener {
         typingTarget = textHolder;
     }
 
+    /**
+     * The mouseReleased method is intentionally left empty in this subclass,
+     * as the behavior is handled by the parent class {@code CreationTool}.
+     * Refer to the parent class implementation for details on the behavior.
+     */
     @Override
     public void mouseReleased(MouseEvent evt) {
+        // Method intentionally left empty
     }
 
     protected void endEdit() {
