@@ -109,8 +109,14 @@ public class TextCreationTool extends CreationTool implements ActionListener {
         }
     }
 
+    /**
+     * The mouseDragged method is intentionally left empty in this subclass,
+     * as the dragging behavior is handled by the parent class {@code CreationTool}.
+     * Refer to the parent class implementation for details on dragging behavior.
+     */
     @Override
     public void mouseDragged(java.awt.event.MouseEvent e) {
+        // Method intentionally left empty
     }
 
     protected void beginEdit(TextHolderFigure textHolder) {
