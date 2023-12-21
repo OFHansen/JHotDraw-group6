@@ -241,4 +241,8 @@ public class TextAreaCreationTool extends CreationTool implements ActionListener
             fireToolDone();
         }
     }
+
+    public Object getTypingTarget() {
+        return typingTarget;
+    }
 }
