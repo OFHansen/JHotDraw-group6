@@ -1,0 +1,90 @@
+{
+  "className": "org.jhotdraw.draw.figure.AcceptanceTest",
+  "name": "Acceptance",
+  "scenarios": [
+    {
+      "className": "org.jhotdraw.draw.figure.AcceptanceTest",
+      "testMethodName": "acceptanceTest",
+      "description": "Acceptance test",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [
+            {
+              "name": "edit text",
+              "words": [
+                {
+                  "value": "Given",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "edit text"
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 7567900,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "add new text",
+              "words": [
+                {
+                  "value": "When",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "add new text"
+                },
+                {
+                  "value": "TextAreaFigure@1649847375",
+                  "argumentInfo": {
+                    "argumentName": "textAreaFigure",
+                    "formattedValue": "TextAreaFigure@1649847375"
+                  }
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 6567500,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "assert new text",
+              "words": [
+                {
+                  "value": "Then",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "assert new text"
+                },
+                {
+                  "value": "TextAreaFigure@1649847375",
+                  "argumentInfo": {
+                    "argumentName": "textAreaFigure",
+                    "formattedValue": "TextAreaFigure@1649847375"
+                  }
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 924700,
+              "depth": 0,
+              "parentFailed": false
+            }
+          ],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "SUCCESS",
+          "durationInNanos": 193070500
+        }
+      ],
+      "casesAsTable": false,
+      "durationInNanos": 193070500
+    }
+  ],
+  "tagMap": {}
+}
