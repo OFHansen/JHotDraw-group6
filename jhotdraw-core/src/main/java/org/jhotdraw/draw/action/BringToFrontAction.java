@@ -66,7 +66,7 @@ public class BringToFrontAction extends AbstractSelectedAction {
         });
     }
 
-    //@FeatureEntryPoint("Bring to front")
+    @FeatureEntryPoint("Bring to front")
     public static void bringToFront(DrawingView view, Collection<Figure> figures) {
         Drawing drawing = view.getDrawing();
         for (Figure figure : drawing.sort(figures)) {

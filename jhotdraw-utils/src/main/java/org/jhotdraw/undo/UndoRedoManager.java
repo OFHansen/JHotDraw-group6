@@ -255,7 +255,6 @@ public class UndoRedoManager extends UndoManager { //javax.swing.undo.UndoManage
      * while undo is in progress.
      */
     @Override
-    @FeatureEntryPoint("Undo")
     public void undo()
             throws CannotUndoException {
         undoOrRedoInProgress = true;

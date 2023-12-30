@@ -7,6 +7,7 @@
  */
 package org.jhotdraw.draw.action;
 
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.draw.figure.Figure;
 import java.awt.*;
 import java.util.*;
@@ -24,6 +25,7 @@ import org.jhotdraw.util.ResourceBundleUtil;
  * @author Werner Randelshofer
  * @version $Id$
  */
+
 public class DrawingColorChooserAction extends EditorColorChooserAction {
 
     private static final long serialVersionUID = 1L;
@@ -57,7 +59,6 @@ public class DrawingColorChooserAction extends EditorColorChooserAction {
             Map<AttributeKey<?>, Object> fixedAttributes) {
         super(editor, key, name, icon, fixedAttributes);
     }
-
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e) {
         if (colorChooser == null) {
