@@ -7,6 +7,7 @@
  */
 package org.jhotdraw.samples.svg.io;
 
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.draw.figure.BezierFigure;
 import org.jhotdraw.draw.figure.Figure;
 import java.awt.*;
@@ -478,7 +479,7 @@ public class SVGOutputFormat implements OutputFormat {
                         styledDoc,
                         f.getAttributes()));
     }
-
+    @FeatureEntryPoint("CreateText")
     protected Element createText(Element doc,
             Point2D.Double[] coordinates, double[] rotate,
             StyledDocument text,

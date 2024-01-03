@@ -66,6 +66,7 @@ public class TextCreationTool extends CreationTool implements ActionListener {
     /**
      * Creates a new instance.
      */
+    @FeatureEntryPoint("TextCreationTool")
     public TextCreationTool(TextHolderFigure prototype) {
         super(prototype);
     }

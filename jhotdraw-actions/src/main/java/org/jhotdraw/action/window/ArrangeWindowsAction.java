@@ -9,6 +9,8 @@ package org.jhotdraw.action.window;
 
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
+
+import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.api.gui.Arrangeable;
 import static org.jhotdraw.api.gui.Arrangeable.Arrangement.CASCADE;
 import static org.jhotdraw.api.gui.Arrangeable.Arrangement.HORIZONTAL;
@@ -39,6 +41,7 @@ public class ArrangeWindowsAction extends AbstractAction {
     /**
      * Creates a new instance.
      */
+    @FeatureEntryPoint("ArrangeWindowsAction")
     public ArrangeWindowsAction(Arrangeable arrangeable, Arrangeable.Arrangement arrangement) {
         this.arrangeable = arrangeable;
         this.arrangement = arrangement;

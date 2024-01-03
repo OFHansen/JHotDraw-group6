@@ -53,6 +53,7 @@ public class UndoAction extends AbstractViewAction {
     /**
      * Creates a new instance.
      */
+    @FeatureEntryPoint("UndoAction")
     public UndoAction(Application app, View view) {
         super(app, view);
         labels.configureAction(this, ID);
