@@ -7,7 +7,6 @@
  */
 package org.jhotdraw.draw.action;
 
-import dk.sdu.mmmi.featuretracer.lib.FeatureEntryPoint;
 import org.jhotdraw.draw.figure.CompositeFigure;
 import org.jhotdraw.draw.figure.GroupFigure;
 import org.jhotdraw.draw.*;
@@ -23,10 +22,6 @@ public class UngroupAction extends GroupAction {
 
     private static final long serialVersionUID = 1L;
     public static final String ID = "edit.ungroupSelection";
-    /**
-     * Creates a new instance.
-     */
-    private CompositeFigure prototype;
 
     /**
      * Creates a new instance.
@@ -37,8 +32,7 @@ public class UngroupAction extends GroupAction {
         labels.configureAction(this, ID);
         updateEnabledState();
     }
-
-    //@FeatureEntryPoint("Non implemented ungroup")
+    
     public UngroupAction(DrawingEditor editor, CompositeFigure prototype) {
         super(editor, prototype, false);
         ResourceBundleUtil labels = ResourceBundleUtil.getBundle("org.jhotdraw.draw.Labels");
