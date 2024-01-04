@@ -150,17 +150,6 @@ public class GroupAction extends AbstractSelectedAction {
         }
     }
 
-    @FeatureEntryPoint("Ungrouping")
-    public Collection<Figure> ungroupFigures(DrawingView view, CompositeFigure group) {
-        LinkedList<Figure> figures = new LinkedList<>(group.getChildren());
-        view.clearSelection();
-        group.basicRemoveAllChildren();
-        view.getDrawing().basicAddAll(view.getDrawing().indexOf(group), figures);
-        view.getDrawing().remove(group);
-        view.addToSelection(figures);
-        return figures;
-    }
-
     @FeatureEntryPoint("Grouping")
     public void groupFigures(DrawingView view, CompositeFigure group, Collection<Figure> figures) {
         Collection<Figure> sorted = view.getDrawing().sort(figures);
@@ -175,5 +164,24 @@ public class GroupAction extends AbstractSelectedAction {
         }
         group.changed();
         view.addToSelection(group);
+    }
+
+    @FeatureEntryPoint("Ungrouping")
+    public Collection<Figure> ungroupFigures(DrawingView view, CompositeFigure group) {
+        LinkedList<Figure> figures = new LinkedList<>(group.getChildren());
+        view.clearSelection();
+        group.basicRemoveAllChildren();
+        view.getDrawing().basicAddAll(view.getDrawing().indexOf(group), figures);
+        view.getDrawing().remove(group);
+        view.addToSelection(figures);
+        return figures;
+    }
+
+    public CompositeFigure getPrototype() {
+        return prototype;
+    }
+
+    public void setPrototype(CompositeFigure prototype) {
+        this.prototype = prototype;
     }
 }
