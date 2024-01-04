@@ -26,6 +26,7 @@ public class GroupAction extends AbstractSelectedAction {
 
     private static final long serialVersionUID = 1L;
     public static final String ID = "edit.groupSelection";
+    public static final String LABELS = "org.jhotdraw.draw.Labels";
     private CompositeFigure prototype;
     /**
      * If this variable is true, this action groups figures.
@@ -49,7 +50,7 @@ public class GroupAction extends AbstractSelectedAction {
         this.prototype = prototype;
         this.isGroupingAction = isGroupingAction;
         ResourceBundleUtil labels
-                = ResourceBundleUtil.getBundle("org.jhotdraw.draw.Labels");
+                = ResourceBundleUtil.getBundle(LABELS);
         labels.configureAction(this, ID);
         updateEnabledState();
     }
@@ -78,70 +79,74 @@ public class GroupAction extends AbstractSelectedAction {
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e) {
         if (isGroupingAction) {
-            if (canGroup()) {
-                final DrawingView view = getView();
-                final LinkedList<Figure> ungroupedFigures = new LinkedList<>(view.getSelectedFigures());
-                final CompositeFigure group = (CompositeFigure) prototype.clone();
-                UndoableEdit edit = new AbstractUndoableEdit() {
-                    private static final long serialVersionUID = 1L;
-
-                    @Override
-                    public String getPresentationName() {
-                        ResourceBundleUtil labels
-                                = ResourceBundleUtil.getBundle("org.jhotdraw.draw.Labels");
-                        return labels.getString("edit.groupSelection.text");
-                    }
-
-                    @Override
-                    public void redo() throws CannotRedoException {
-                        super.redo();
-                        groupFigures(view, group, ungroupedFigures);
-                    }
-
-                    @Override
-                    public void undo() throws CannotUndoException {
-                        ungroupFigures(view, group);
-                        super.undo();
-                    }
-
-                    @Override
-                    public boolean addEdit(UndoableEdit anEdit) {
-                        return super.addEdit(anEdit);
-                    }
-                };
-                groupFigures(view, group, ungroupedFigures);
-                fireUndoableEditHappened(edit);
-            }
+            group();
         } else {
-            if (canUngroup()) {
-                final DrawingView view = getView();
-                final CompositeFigure group = (CompositeFigure) getView().getSelectedFigures().iterator().next();
-                final LinkedList<Figure> ungroupedFigures = new LinkedList<>();
-                UndoableEdit edit = new AbstractUndoableEdit() {
-                    private static final long serialVersionUID = 1L;
+            ungroup();
+        }
+    }
 
-                    @Override
-                    public String getPresentationName() {
-                        ResourceBundleUtil labels
-                                = ResourceBundleUtil.getBundle("org.jhotdraw.draw.Labels");
-                        return labels.getString("edit.ungroupSelection.text");
-                    }
+    private void group() {
+        if (canGroup()) {
+            final DrawingView view = getView();
+            final LinkedList<Figure> ungroupedFigures = new LinkedList<>(view.getSelectedFigures());
+            final CompositeFigure group = (CompositeFigure) prototype.clone();
+            UndoableEdit edit = new AbstractUndoableEdit() {
+                private static final long serialVersionUID = 1L;
 
-                    @Override
-                    public void redo() throws CannotRedoException {
-                        super.redo();
-                        ungroupFigures(view, group);
-                    }
+                @Override
+                public String getPresentationName() {
+                    ResourceBundleUtil labels
+                            = ResourceBundleUtil.getBundle(LABELS);
+                    return labels.getString("edit.groupSelection.text");
+                }
 
-                    @Override
-                    public void undo() throws CannotUndoException {
-                        groupFigures(view, group, ungroupedFigures);
-                        super.undo();
-                    }
-                };
-                ungroupedFigures.addAll(ungroupFigures(view, group));
-                fireUndoableEditHappened(edit);
-            }
+                @Override
+                public void redo() throws CannotRedoException {
+                    super.redo();
+                    groupFigures(view, group, ungroupedFigures);
+                }
+
+                @Override
+                public void undo() throws CannotUndoException {
+                    ungroupFigures(view, group);
+                    super.undo();
+                }
+
+            };
+            groupFigures(view, group, ungroupedFigures);
+            fireUndoableEditHappened(edit);
+        }
+    }
+
+    private void ungroup() {
+        if (canUngroup()) {
+            final DrawingView view = getView();
+            final CompositeFigure group = (CompositeFigure) getView().getSelectedFigures().iterator().next();
+            final LinkedList<Figure> ungroupedFigures = new LinkedList<>();
+            UndoableEdit edit = new AbstractUndoableEdit() {
+                private static final long serialVersionUID = 1L;
+
+                @Override
+                public String getPresentationName() {
+                    ResourceBundleUtil labels
+                            = ResourceBundleUtil.getBundle(LABELS);
+                    return labels.getString("edit.ungroupSelection.text");
+                }
+
+                @Override
+                public void redo() throws CannotRedoException {
+                    super.redo();
+                    ungroupFigures(view, group);
+                }
+
+                @Override
+                public void undo() throws CannotUndoException {
+                    groupFigures(view, group, ungroupedFigures);
+                    super.undo();
+                }
+            };
+            ungroupedFigures.addAll(ungroupFigures(view, group));
+            fireUndoableEditHappened(edit);
         }
     }
 
