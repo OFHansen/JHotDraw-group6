@@ -1,0 +1,97 @@
+{
+  "className": "org.jhotdraw.draw.action.GroupActionAcceptanceTest",
+  "name": "Group Action Acceptance",
+  "scenarios": [
+    {
+      "className": "org.jhotdraw.draw.action.GroupActionAcceptanceTest",
+      "testMethodName": "acceptanceTest",
+      "description": "Acceptance test",
+      "tagIds": [],
+      "explicitParameters": [],
+      "derivedParameters": [],
+      "scenarioCases": [
+        {
+          "caseNr": 1,
+          "steps": [
+            {
+              "name": "a drawing view with multiple figures",
+              "words": [
+                {
+                  "value": "Given",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "a drawing view with multiple figures"
+                },
+                {
+                  "value": "Mock for DrawingView, hashCode: 1286580650",
+                  "argumentInfo": {
+                    "argumentName": "drawingView",
+                    "formattedValue": "Mock for DrawingView, hashCode: 1286580650"
+                  }
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 27488200,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "the group action is used",
+              "words": [
+                {
+                  "value": "When",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "the group action is used"
+                },
+                {
+                  "value": "org.jhotdraw.draw.action.GroupAction@11b377c5",
+                  "argumentInfo": {
+                    "argumentName": "groupAction",
+                    "formattedValue": "org.jhotdraw.draw.action.GroupAction@11b377c5"
+                  }
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 15400300,
+              "depth": 0,
+              "parentFailed": false
+            },
+            {
+              "name": "grouping should be allowed",
+              "words": [
+                {
+                  "value": "Then",
+                  "isIntroWord": true
+                },
+                {
+                  "value": "grouping should be allowed"
+                },
+                {
+                  "value": "org.jhotdraw.draw.action.GroupAction@11b377c5",
+                  "argumentInfo": {
+                    "argumentName": "groupAction",
+                    "formattedValue": "org.jhotdraw.draw.action.GroupAction@11b377c5"
+                  }
+                }
+              ],
+              "status": "PASSED",
+              "durationInNanos": 5701900,
+              "depth": 0,
+              "parentFailed": false
+            }
+          ],
+          "explicitArguments": [],
+          "derivedArguments": [],
+          "status": "SUCCESS",
+          "durationInNanos": 1633721900
+        }
+      ],
+      "casesAsTable": false,
+      "durationInNanos": 1633721900
+    }
+  ],
+  "tagMap": {}
+}
